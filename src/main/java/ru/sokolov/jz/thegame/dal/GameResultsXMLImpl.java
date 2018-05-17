@@ -5,11 +5,11 @@ import ru.sokolov.jz.thegame.entities.User;
 import ru.sokolov.jz.thegame.utils.XMLUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  * Created by sokolov
@@ -72,6 +72,10 @@ public class GameResultsXMLImpl implements IGameResults {
 
     private boolean ensureFolderPath() {
         File folder = new File(FOLDER_PATH);
-        return folder.exists() || folder.mkdirs();
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        Logger.getLogger(getClass().getName()).info(folder.getAbsolutePath());
+        return true;
     }
 }

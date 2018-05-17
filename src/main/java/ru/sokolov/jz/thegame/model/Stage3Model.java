@@ -53,21 +53,23 @@ public class Stage3Model {
         if (thePlayer.getUser().getCount() > 0) {
             return Stage3Model.VARIANT.RANDOM_PERCENT;
         } else {
-            int[] gameVariantCounts = new int[2];
+            int[] gameVariantCounts = new int[3];
             List<Player> players = TheGameModel.getInstance().getAllPlayers();
             for (Player player : players) {
                 if (player.getStage3variant() == Stage3Model.VARIANT.UP_PERCENT) {
                     gameVariantCounts[0]++;//up
-                } else {
+                } else if (player.getStage3variant() == Stage3Model.VARIANT.DOWN_PERCENT) {
                     gameVariantCounts[1]++;//down
+                } else {
+                    gameVariantCounts[2]++;//random
                 }
             }
             int minimum = gameVariantCounts[0];
             Stage3Model.VARIANT variant = Stage3Model.VARIANT.UP_PERCENT;
-            for (int i = 1; i < 2; i++) {
+            for (int i = 1; i < 3; i++) {
                 if (gameVariantCounts[i] < minimum) {
                     minimum = gameVariantCounts[i];
-                    variant = Stage3Model.VARIANT.DOWN_PERCENT;
+                    variant = Stage3Model.VARIANT.getByNumber(i + 1);
                 }
             }
             return variant;

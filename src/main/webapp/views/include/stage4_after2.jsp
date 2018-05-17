@@ -14,9 +14,9 @@
 <ul>
     <li>Можно ли сказать, что это сильно больше, чем Вы рассчитывали получить, или сильно меньше?
         <ul>
-            <li><input type="radio" name="<%=step%>_q" value="0">&nbsp;&nbsp;Сильно больше, чем я рассчитывал</li>
-            <li><input type="radio" name="<%=step%>_q" value="1">&nbsp;&nbsp;Затрудняюсь ответить</li>
-            <li><input type="radio" name="<%=step%>_q" value="2">&nbsp;&nbsp;Сильно меньше, чем я рассчитывал</li>
+            <li><input type="radio" name="<%=step%>_q" value="2">&nbsp;&nbsp;Сильно больше, чем я рассчитывал</li>
+            <li><input type="radio" name="<%=step%>_q" value="1">&nbsp;&nbsp;Сильно меньше, чем я рассчитывал</li>
+            <li><input type="radio" name="<%=step%>_q" value="0">&nbsp;&nbsp;Ни один из вариантов не подходит</li>
         </ul>
         <div id="<%=step%>_warning" style='display:none; color:red;'>Сделайте выбор</div>
     </li>

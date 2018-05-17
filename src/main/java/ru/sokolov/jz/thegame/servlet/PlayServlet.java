@@ -55,9 +55,7 @@ public class PlayServlet extends HttpServlet {
                 session.setAttribute("step", step);
             }
             String stepPassed = request.getParameter(step + "_passed");
-            if (!"true".equals(stepPassed)) {
-                preStep(step, request);
-            } else {
+            if ("true".equals(stepPassed)) {
                 postStep(step, request);
                 if ("final".equals(request.getSession().getAttribute("step"))) {
                     path = "/final";
@@ -66,10 +64,6 @@ public class PlayServlet extends HttpServlet {
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
-    }
-
-    private void preStep(String step, HttpServletRequest request) {
-        //todo что здесь?
     }
 
     private void postStep(String step, HttpServletRequest request) {
@@ -275,8 +269,7 @@ public class PlayServlet extends HttpServlet {
             case STAGE8 + "_after":
                 boolean markedAccordance = Boolean.parseBoolean(request.getParameter(step + "_q"));
                 player.setMarkedAccordance(markedAccordance);
-                if (player.isAlreadyPlayed()) {
-                    TheGameModel.getInstance().storePlayer(player);
+                if (player.isAlreadyPlayed() && player.getUser().getCount() > 0) {
                     request.getSession().setAttribute("step", STAGE10);
                 } else {
                     request.getSession().setAttribute("step", STAGE9);
@@ -338,7 +331,6 @@ public class PlayServlet extends HttpServlet {
         int returnValue = (int) (bet*3*percent);
         player.setStage3return(returnValue, betNumber - 1);
         player.setStage3Wallet(player.getStage3Wallet() - bet + returnValue);
-        request.setAttribute(STAGE3 + "_" + betNumber + "_after_return", String.valueOf(returnValue));
     }
 
     private void stage3AfterBetHandler(int betNumber, String step, HttpServletRequest request, Player player) {
@@ -350,7 +342,6 @@ public class PlayServlet extends HttpServlet {
     private void stage7WaitHandler(int roundNumber, HttpServletRequest request, Player player) {
         int compBet = player.getStage3bet(roundNumber - 1);
         player.setStage7Wallet(player.getStage7Wallet() + 3 * compBet);
-        request.setAttribute(STAGE7 + "_" + roundNumber + "_bet", String.valueOf(compBet));
         randomDelay();
     }
 

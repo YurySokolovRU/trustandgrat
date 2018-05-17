@@ -97,7 +97,7 @@
 <br>
 <div>
     <% topUsers = data.getRiskTopUsers(); %>
-    Самы рисковые:
+    Самые рисковые:
     <%
         out.println("<ol>");
         for (String[] topUser : topUsers) {

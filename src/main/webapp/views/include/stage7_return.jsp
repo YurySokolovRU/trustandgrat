@@ -6,13 +6,15 @@
 <%
     Player player = (Player) session.getAttribute("player");
     String step = (String) session.getAttribute("step");
+
+    int roundNumber = Integer.parseInt(step.substring((PlayServlet.STAGE7 + "_return_").length()));
+    int compBet = player.getStage3bet(roundNumber - 1);
 %>
 <%--stage7_return_{n}--%>
-<% int roundNumber = Integer.parseInt(step.substring((PlayServlet.STAGE7 + "_return_").length())); %>
 <h1>Раунд <%=roundNumber%></h1>
 
 <p class="instructions">Благодря тому, что ваш партнер по игре доверил вам некоторую сумму, вы получаете
-    <span style='color:red'><%=PlayServlet.getCreditSpelling(3 * Integer.parseInt((String) request.getAttribute(PlayServlet.STAGE7 + "_" + roundNumber + "_bet")))%></span>.
+    <span style='color:red'><%=PlayServlet.getCreditSpelling(3 * compBet)%></span>.
     Вы можете вознаградить Вашего партнера и передать ему от 0 до <%=PlayServlet.getCreditSpelling(player.getStage7Wallet())%>. Размер
     возвращаемой суммы определяется исключительно Вашим решением
 </p>

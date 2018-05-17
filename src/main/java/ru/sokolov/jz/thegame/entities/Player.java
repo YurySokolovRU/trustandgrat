@@ -37,7 +37,7 @@ public class Player {
     private int[] stage10q = new int[4];// ответы на Слономуха
     private boolean markedAccordance;// заметили ли соответствие
 
-    private int[][] slonomuh = new int[4][4];
+    private int[][] slonomuh = new int[4][4];// порядок предъявления Слономуха
 
     private int ratingBetsSum;
     private int ratingBetsPercent;
