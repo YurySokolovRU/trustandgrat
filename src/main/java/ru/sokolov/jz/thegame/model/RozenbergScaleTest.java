@@ -10,21 +10,21 @@ import java.util.Random;
  * Created on 23.04.2018.
  */
 public class RozenbergScaleTest {
-    private static final String Q1_PREFIX = "Как вы думаете,";
+    private static final String Q1_PREFIX = "Как Вы думаете,";
     private static final String Q1_PHRASE_A = "большинству людей можно доверять";
     private static final String Q1_OR = "или";
     private static final String Q1_PHRASE_B = "во взаимодействии с другими нужно соблюдать осторожность";
     private static final String Q1_ANSWER_A = "Большинству людей можно доверять";
     private static final String Q1_ANSWER_B = "Во взаимодействии с другими нужно соблюдать осторожность";
 
-    private static final String Q2_PREFIX = "Могли бы вы сказать, что люди";
+    private static final String Q2_PREFIX = "Могли бы Вы сказать, что люди";
     private static final String Q2_PHRASE_A = "чаще всего стремятся быть полезными другим";
     private static final String Q2_OR = "или они";
     private static final String Q2_PHRASE_B = "думают только о себе";
     private static final String Q2_ANSWER_A = "Стремятся быть полезными другим";
     private static final String Q2_ANSWER_B = "Думают только о себе";
 
-    private static final String Q3_PREFIX = "Как вы думаете, большинство людей";
+    private static final String Q3_PREFIX = "Как Вы думаете, большинство людей";
     private static final String Q3_PHRASE_A = "вели бы себя честно";
     private static final String Q3_OR = "или";
     private static final String Q3_PHRASE_B = "попытались бы обмануть вас, если бы им представилась такая возможность";

@@ -264,7 +264,12 @@ public class PlayServlet extends HttpServlet {
                         Integer.parseInt(stage8q1), Integer.parseInt(stage8q2), Integer.parseInt(stage8q3),
                         Integer.parseInt(stage8q4), Integer.parseInt(stage8q5), Integer.parseInt(stage8q6)}
                 );
-                request.getSession().setAttribute("step", STAGE8 + "_after");
+                //request.getSession().setAttribute("step", STAGE8 + "_after");//todo скрыли этап
+                if (player.isAlreadyPlayed() && player.getUser().getCount() > 0) {
+                    request.getSession().setAttribute("step", STAGE10);
+                } else {
+                    request.getSession().setAttribute("step", STAGE9);
+                }
                 break;
             case STAGE8 + "_after":
                 boolean markedAccordance = Boolean.parseBoolean(request.getParameter(step + "_q"));
@@ -675,6 +680,10 @@ public class PlayServlet extends HttpServlet {
                 }
             }
             return top;
+        }
+
+        public int getGamesCount() {
+            return allPlayers.size();
         }
     }
 }

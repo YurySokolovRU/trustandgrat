@@ -1,0 +1,37 @@
+body {
+    font-size: 20px;
+    /*background-color: #7abbbd;*/
+}
+
+td {
+    font-size: 20px;
+}
+
+button {
+    font-size: 16px;
+    font-weight: bold;
+    /*background: #606263;*/
+    /*border: 5px solid #606263;*/
+    /*width: auto;*/
+    height: 30px;
+    /*border-radius: 10px;*/
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.instructions {
+    font-style: italic;
+}
+
+.red {
+    /*color:#bd3c43;*/
+    color:red;
+}
