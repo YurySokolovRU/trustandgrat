@@ -34,7 +34,10 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if ("jz".equals(request.getParameter("pass"))) {
+        if (request.getParameter("page") != null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/include/admin/" + request.getParameter("page") + ".jsp");
+            requestDispatcher.forward(request, response);
+        } else if ("jz".equals(request.getParameter("pass"))) {
             String admin = request.getParameter("admin");
             if ("true".equals(admin)) {
                 request.getSession().setAttribute("admin", admin);

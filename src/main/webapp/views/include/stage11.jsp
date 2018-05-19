@@ -16,13 +16,13 @@
     За 5 раундов Вы суммарно доверили <span style="font-weight:bold;"><%=PlayServlet.getCreditSpelling(betsSum)%></span>,
     средний процент доверенной суммы от имевшейся в вашем распоряжении: <span style="font-weight:bold;"><%=betsPercent%></span>%
     <br>Вы на <span style="font-weight:bold;"><%=data.getBetsSumRatingPosition(betsSum)%></span> месте из <%=gamesCount%> по сумме и на
-    <span style="font-weight:bold;"><%=data.getBetsPercentRatingPosition(betsSum)%></span> месте из <%=gamesCount%> по проценту доверенного.
+    <span style="font-weight:bold;"><%=data.getBetsPercentRatingPosition(betsPercent)%></span> месте из <%=gamesCount%> по проценту доверенного.
 </div>
 <br><br>
 <div>
     За 5 раундов в качестве благодарности за доверие Вы вознаградили партнера суммой в <span style="font-weight:bold;"><%=PlayServlet.getCreditSpelling(returnsSum)%></span>,
     это составило <span style="font-weight:bold;"><%=returnsPercent%></span>% от доверенного вам.
-    <br>Вы на <span style="font-weight:bold;"><%=data.getReturnsSumRatingPosition(betsSum)%></span> месте из <%=gamesCount%> по сумме и на
+    <br>Вы на <span style="font-weight:bold;"><%=data.getReturnsSumRatingPosition(returnsSum)%></span> месте из <%=gamesCount%> по сумме и на
     <span style="font-weight:bold;"><%=data.getReturnsPercentRatingPosition(returnsPercent)%></span> месте из <%=gamesCount%> по проценту возвращенного.
 </div>
 <br><br>
@@ -60,7 +60,7 @@
     %>
     Вы <%=adverb%> согласились сыграть в супер-игру<%=totalSumPhrase%>.
     <% if (sum > 0) { %>
-        По сравнению с другими игроками, Вы на <%=data.getSuperSumsRatingPosition(sum) %> месте.
+        По сравнению с другими игроками, вы на <%=data.getSuperSumsRatingPosition(sum) %> месте.
     <% } %>
 </div>
 <br>

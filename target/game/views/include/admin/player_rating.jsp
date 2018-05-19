@@ -1,8 +1,9 @@
 <%@ page import="ru.sokolov.jz.thegame.entities.Player" %>
 <%@ page import="ru.sokolov.jz.thegame.servlet.PlayServlet" %>
+<%@ page import="ru.sokolov.jz.thegame.model.TheGameModel" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% Player player = (Player) session.getAttribute("player");
+<% Player player = TheGameModel.getInstance().getPlayerById(request.getParameter("player_id"));
 
     int betsSum = player.getRatingBetsSum();
     int betsPercent = player.getRatingBetsPercent();
@@ -60,7 +61,7 @@
     %>
     Вы <%=adverb%> согласились сыграть в супер-игру<%=totalSumPhrase%>.
     <% if (sum > 0) { %>
-        По сравнению с другими игроками, вы на <%=data.getSuperSumsRatingPosition(sum) %> месте.
+    По сравнению с другими игроками, вы на <%=data.getSuperSumsRatingPosition(sum) %> месте.
     <% } %>
 </div>
 <br>

@@ -67,4 +67,14 @@ public class TheGameModel {
     public List<Player> getPlayers(String userLogin) {
         return gr.getUserPlayers(userLogin);
     }
+
+    public Player getPlayerById(String timestamp) {
+        List<Player> allPlayers = TheGameModel.getInstance().getAllPlayers();
+        for (Player player : allPlayers) {
+            if (player.getTimestamp().equals(timestamp)) {
+                return player;
+            }
+        }
+        return null;
+    }
 }
