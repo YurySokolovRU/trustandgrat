@@ -7,21 +7,16 @@
     <meta content='width' name='MobileOptimized'/>
     <meta content='yes' name='apple-mobile-web-app-capable'/>
 
-    <script>
-        function checkProfessor() {
-            return prompt("А Вы точно Профессор?\nСколько будет 2x2?") == '4';
-        }
-    </script>
 </head>
 <body>
 <form action="" method="post">
     <input type=hidden name=xls>
-    <input type=submit value="Профессор хочет выгрузить данные">
+    <input type=submit value="Данные">
 </form>
 
-<form action="" method="post" onsubmit="return checkProfessor();">
+<form action="" method="post">
     <input type=hidden name=doc>
-    <input type="submit" value="Профессор хочет знать, что означают столбцы">
+    <input type="submit" value="Описание столбцов">
 </form>
 </body>
 </html>

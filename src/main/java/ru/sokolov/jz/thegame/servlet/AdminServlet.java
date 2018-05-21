@@ -1,6 +1,7 @@
 package ru.sokolov.jz.thegame.servlet;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.IOUtils;
 import ru.sokolov.jz.thegame.utils.ExcelUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 
 /**
  * Created by sokolov
@@ -27,9 +28,13 @@ public class AdminServlet extends HttpServlet {
                 writeIntoExcel(out);
             }
         } else if (request.getParameter("doc") != null) {
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.println("<img src='images/work_for_it.jpg'>");
+            response.setContentType("application/x-download");
+            response.setHeader("Content-Disposition", "attachment; filename=description.docx");
+            try (OutputStream out = response.getOutputStream()) {
+                try (InputStream is = AdminServlet.class.getClassLoader().getResourceAsStream("description.docx")) {
+                    IOUtils.copy(is, out);
+                }
+            }
         }
     }
 
