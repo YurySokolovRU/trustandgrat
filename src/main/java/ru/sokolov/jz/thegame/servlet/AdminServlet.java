@@ -35,20 +35,14 @@ public class AdminServlet extends HttpServlet {
                     IOUtils.copy(is, out);
                 }
             }
+        } else if (request.getParameter("player_id") != null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/include/admin/player_rating.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("page") != null) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/include/admin/" + request.getParameter("page") + ".jsp");
-            requestDispatcher.forward(request, response);
-        } else if ("jz".equals(request.getParameter("pass"))) {
-            String admin = request.getParameter("admin");
-            if ("true".equals(admin)) {
-                request.getSession().setAttribute("admin", admin);
-            } else {
-                request.getSession().setAttribute("admin", null);
-            }
+        if ("jz".equals(request.getParameter("pass"))) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/admin.jsp");
             requestDispatcher.forward(request, response);
         } else {

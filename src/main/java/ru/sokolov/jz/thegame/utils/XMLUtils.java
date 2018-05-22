@@ -305,7 +305,7 @@ public class XMLUtils {
                 player.setRozTrustNumber(Integer.parseInt(readValue(root, "rozTrustNumber")));
                 player.setStage3variant(Stage3Model.VARIANT.getByNumber(Integer.parseInt(readValue(root, "stage3Variant"))));
 
-                if ("true".equals(readValue(root, "completed"))) {
+                if (!"false".equals(readValue(root, "completed"))) {
                     Element stage3Bets = getElement(root, "stage3bets");
                     if (stage3Bets != null) {//bet1,..,5
                         for (int i = 1; i < 6; i++) {
