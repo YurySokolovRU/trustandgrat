@@ -54,7 +54,7 @@ public class Stage3Model {
             return Stage3Model.VARIANT.RANDOM_PERCENT;
         } else {
             int[] gameVariantCounts = new int[3];
-            List<Player> players = TheGameModel.getInstance().getAllPlayers();
+            List<Player> players = TheGameModel.getInstance().getActualPlayers();
             for (Player player : players) {
                 if (player.getStage3variant() == Stage3Model.VARIANT.UP_PERCENT) {
                     gameVariantCounts[0]++;//up

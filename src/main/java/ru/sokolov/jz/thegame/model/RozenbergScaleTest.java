@@ -203,7 +203,7 @@ public class RozenbergScaleTest {
 
     public static RozenbergScaleTest.VARIANT calcRozenbergVariantForNewPlayer() {
         int[] rozenbergVariantCounts = new int[4];
-        List<Player> players = TheGameModel.getInstance().getAllPlayers();
+        List<Player> players = TheGameModel.getInstance().getActualPlayers();
         for (Player player : players) {
             rozenbergVariantCounts[player.getRozenbergNumber().getVariantNumber()-1]++;
         }

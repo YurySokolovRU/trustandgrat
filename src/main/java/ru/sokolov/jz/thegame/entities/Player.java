@@ -45,6 +45,8 @@ public class Player {
     private int ratingReturnsPercent;
     private int ratingSuperSum;
 
+    private boolean completed;
+
     public Player() {
     }
 
@@ -370,5 +372,13 @@ public class Player {
 
     public void setRatingSuperSum(int ratingSuperSum) {
         this.ratingSuperSum = ratingSuperSum;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

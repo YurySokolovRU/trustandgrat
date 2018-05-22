@@ -83,6 +83,7 @@ public class PlayServlet extends HttpServlet {
                 player.setRozTrust(RozenbergScaleTest.isTrust(trustNumber));
                 Stage3Model.VARIANT stage3variant = Stage3Model.calcStage3VariantForNewPlayer(player);
                 player.setStage3variant(stage3variant);
+                TheGameModel.getInstance().initStorePlayer(player);
                 request.getSession().setAttribute("step", STAGE3);
                 break;
             case STAGE3:
@@ -300,7 +301,7 @@ public class PlayServlet extends HttpServlet {
                 player.setRatingReturnsSum(getReturnsSum(player));
                 player.setRatingReturnsPercent(getReturnsPercent(player));
                 player.setRatingSuperSum(getSuperSums(player));
-                TheGameModel.getInstance().storePlayer(player);
+                TheGameModel.getInstance().finalStorePlayer(player);
                 request.getSession().setAttribute("step", STAGE11);
                 break;
             case STAGE11:
@@ -462,7 +463,7 @@ public class PlayServlet extends HttpServlet {
         Player currentPlayer;
 
         public TotalData(Player player) {
-            this.allPlayers = TheGameModel.getInstance().getAllPlayers();
+            this.allPlayers = TheGameModel.getInstance().getCompletedPlayers();
             currentPlayer = player;
         }
 

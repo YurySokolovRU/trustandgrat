@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
                 player = new Player(user);
                 player.setTimestamp(String.valueOf(System.currentTimeMillis()));
                 player.setRozenbergNumber(RozenbergScaleTest.calcRozenbergVariantForNewPlayer());
+                model.initStorePlayer(player);
             }
         }
         if (player == null) {

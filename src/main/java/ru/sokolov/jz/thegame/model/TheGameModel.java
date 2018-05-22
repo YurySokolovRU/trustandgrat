@@ -5,6 +5,7 @@ import ru.sokolov.jz.thegame.dal.IGameResults;
 import ru.sokolov.jz.thegame.entities.Player;
 import ru.sokolov.jz.thegame.entities.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,7 @@ public class TheGameModel {
         Player player = new Player(user);
         player.setRozenbergNumber(RozenbergScaleTest.calcRozenbergVariantForNewPlayer());
         player.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        initStorePlayer(player);
         return player;
     }
 
@@ -41,12 +43,37 @@ public class TheGameModel {
         return gr.getPlayers();
     }
 
+    public List<Player> getActualPlayers() {
+        List<Player> actualPlayers = new ArrayList<>();
+        List<Player> players = gr.getPlayers();
+        for (Player player : players) {
+            if (player.isCompleted() || (System.currentTimeMillis() - Long.parseLong(player.getTimestamp())) < 10800000) {
+                actualPlayers.add(player);
+            }
+        }
+        return actualPlayers;
+    }
+
+    public List<Player> getCompletedPlayers() {
+        return getCompletedPlayers(null);
+    }
+
+    public List<Player> getCompletedPlayers(String userLogin) {
+        List<Player> completedPlayers = new ArrayList<>();
+        List<Player> players = userLogin == null ? gr.getPlayers() : gr.getUserPlayers(userLogin);
+        for (Player player : players) {
+            if (player.isCompleted()) {
+                completedPlayers.add(player);
+            }
+        }
+        return completedPlayers;
+    }
+
     public Map<User, List<Player>> getUsersPlayers() {
         Map<User, List<Player>> userPlayers = new HashMap<>();
         List<User> users = gr.getUsers();
         for (User user : users) {
-            List<Player> players = gr.getUserPlayers(user.getLogin());
-            userPlayers.put(user, players);
+            userPlayers.put(user, getCompletedPlayers(user.getLogin()));
         }
         return userPlayers;
     }
@@ -59,13 +86,14 @@ public class TheGameModel {
         gr.saveUser(user);
     }
 
-    public void storePlayer(Player player) {
-        player.getUser().setCount(player.getUser().getCount() + 1);
+    public void initStorePlayer(Player player) {
         gr.savePlayer(player);
     }
 
-    public List<Player> getPlayers(String userLogin) {
-        return gr.getUserPlayers(userLogin);
+    public void finalStorePlayer(Player player) {
+        player.getUser().setCount(player.getUser().getCount() + 1);
+        player.setCompleted(true);
+        gr.savePlayer(player);
     }
 
     public Player getPlayerById(String timestamp) {
