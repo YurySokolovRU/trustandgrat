@@ -55,7 +55,37 @@ public class GameResultsInMemoryImpl implements IGameResults {
     }
 
     @Override
+    public Player getUserPlayer(String userLogin, String timestamp) {
+        for (Player player : players) {
+            if (player.getTimestamp().equals(timestamp)) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<Player> getPlayers() {
         return players;
+    }
+
+    @Override
+    public void deletePlayer(String timestamp) {
+        for (Player player : players) {
+            if (player.getTimestamp().equals(timestamp)) {
+                players.remove(player);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void deleteUser(String userLogin) {
+        for (User user : users) {
+            if (user.getLogin().equals(userLogin)) {
+                users.remove(user);
+                break;
+            }
+        }
     }
 }

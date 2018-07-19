@@ -44,7 +44,22 @@ public class GameResultsDBImpl implements IGameResults {
     }
 
     @Override
+    public Player getUserPlayer(String userLogin, String timestamp) {
+        return null;
+    }
+
+    @Override
     public List<Player> getPlayers() {
         return null;
+    }
+
+    @Override
+    public void deletePlayer(String timestamp) {
+
+    }
+
+    @Override
+    public void deleteUser(String userLogin) {
+
     }
 }

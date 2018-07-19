@@ -5,10 +5,7 @@ import ru.sokolov.jz.thegame.dal.IGameResults;
 import ru.sokolov.jz.thegame.entities.Player;
 import ru.sokolov.jz.thegame.entities.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by sokolov
@@ -40,7 +37,14 @@ public class TheGameModel {
     }
 
     public List<Player> getAllPlayers() {
-        return gr.getPlayers();
+        List<Player> players = gr.getPlayers();
+        Collections.sort(players, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.getTimestamp().compareTo(p2.getTimestamp());
+            }
+        });
+        return players;
     }
 
     public List<Player> getActualPlayers() {
@@ -51,6 +55,12 @@ public class TheGameModel {
                 actualPlayers.add(player);
             }
         }
+        Collections.sort(actualPlayers, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.getTimestamp().compareTo(p2.getTimestamp());
+            }
+        });
         return actualPlayers;
     }
 
@@ -66,16 +76,30 @@ public class TheGameModel {
                 completedPlayers.add(player);
             }
         }
+        Collections.sort(completedPlayers, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.getTimestamp().compareTo(p2.getTimestamp());
+            }
+        });
         return completedPlayers;
     }
 
     public Map<User, List<Player>> getUsersPlayers() {
-        Map<User, List<Player>> userPlayers = new HashMap<>();
+        Map<User, List<Player>> userPlayers = new TreeMap<>();
         List<User> users = gr.getUsers();
         for (User user : users) {
             userPlayers.put(user, getCompletedPlayers(user.getLogin()));
         }
         return userPlayers;
+    }
+
+    public List<Player> getUserPlayers(String login) {
+        return getCompletedPlayers(login);
+    }
+
+    public Player getUserPlayer(String login, String timestamp) {
+        return gr.getUserPlayer(login, timestamp);
     }
 
     public User getUser(String userLogin) {
@@ -104,5 +128,13 @@ public class TheGameModel {
             }
         }
         return null;
+    }
+
+    public void deleteUser(String userLogin) {
+        gr.deleteUser(userLogin);
+    }
+
+    public void deletePlayer(String timestamp) {
+        gr.deletePlayer(timestamp);
     }
 }

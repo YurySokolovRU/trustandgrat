@@ -15,5 +15,8 @@ public interface IGameResults {
     void savePlayer(Player player);
     List<User> getUsers();
     List<Player> getUserPlayers(String userLogin);
+    Player getUserPlayer(String userLogin, String timestamp);
     List<Player> getPlayers();
+    void deleteUser(String userLogin);
+    void deletePlayer(String timestamp);
 }

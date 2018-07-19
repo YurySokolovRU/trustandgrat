@@ -4,7 +4,7 @@ package ru.sokolov.jz.thegame.entities;
  * Created by sokolov
  * Created on 13.04.2018.
  */
-public class User {
+public class User implements Comparable {
     private String login;
     private String password;
     private String contact;
@@ -74,5 +74,14 @@ public class User {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof User) {
+            return getLogin().toLowerCase().compareTo(((User) o).getLogin().toLowerCase());
+        } else {
+            return 0;
+        }
     }
 }

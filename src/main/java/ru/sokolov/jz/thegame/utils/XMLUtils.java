@@ -229,6 +229,15 @@ public class XMLUtils {
         return user;
     }
 
+    public static Player readPlayerFromDocument(String login, String timestamp, String path) {
+        File playerFile = new File(path + "/" + login + "/" + timestamp + ".xml");
+        if (playerFile.exists()) {
+            return readPlayerFromFile(playerFile);
+        } else {
+            return null;
+        }
+    }
+
     public static Document getUserDocument(String login, String path) {
         SAXBuilder parser = new SAXBuilder();
         try {
@@ -422,5 +431,39 @@ public class XMLUtils {
     private static Element getElement(Element rootElement, String name) {
         List<Element> children = rootElement.getChildren(name);
         return children.size() > 0 ? children.get(0) : null;
+    }
+
+    public static void deletePlayerDocument(final String timestamp, String path) {
+        File rootFolder = new File(path);
+        File[] folders = rootFolder.listFiles(File::isDirectory);
+        if (folders != null) {
+            for (File folder : folders) {
+                File[] playerFiles = folder.listFiles((dir, name) -> {
+                    return name.toLowerCase().equals(timestamp.toLowerCase() + ".xml");
+                });
+                if (playerFiles != null && playerFiles.length == 1) {
+                    playerFiles[0].delete();
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void deleteUserDocument(String userLogin, String path) {
+        File userFile = new File(path + "\\" + userLogin + ".xml");
+        if (userFile.exists()) {
+            userFile.delete();
+        }
+    }
+
+    public static void deleteUserFolder(String userLogin, String path) {
+        File userFolder = new File(path + "\\" + userLogin);
+        if (userFolder.exists()) {
+            File[] playerFiles = userFolder.listFiles();
+            for (File playerFile : playerFiles) {
+                playerFile.delete();
+            }
+            userFolder.delete();
+        }
     }
 }

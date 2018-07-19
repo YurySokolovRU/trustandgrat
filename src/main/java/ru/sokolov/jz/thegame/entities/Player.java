@@ -3,12 +3,15 @@ package ru.sokolov.jz.thegame.entities;
 import ru.sokolov.jz.thegame.model.RozenbergScaleTest;
 import ru.sokolov.jz.thegame.model.Stage3Model;
 
+import java.util.Date;
+
 /**
  * Created by sokolov
  * Created on 24.04.2018.
  */
 public class Player {
     private String timestamp;
+    private String timestampAsDateString;
     private User user;
 
     private boolean alreadyPlayed;// уже играл?
@@ -56,6 +59,10 @@ public class Player {
 
     public String getTimestamp() {
         return timestamp;
+    }
+
+    public String getAsDateString() {
+        return timestampAsDateString;
     }
 
     public RozenbergScaleTest.VARIANT getRozenbergNumber() {
@@ -308,6 +315,12 @@ public class Player {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+        if (timestamp != null && !timestamp.equals("")) {
+            Date date = new Date(Long.parseLong(timestamp));
+            timestampAsDateString = date.toLocaleString();
+        } else {
+            timestampAsDateString = "nulldate";
+        }
     }
 
     public void setUser(User user) {

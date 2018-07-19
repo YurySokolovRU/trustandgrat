@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class ExcelUtils {
 
-    public static Workbook createResultBook() throws IOException {
+    public static Workbook createResultBook(boolean include) throws IOException {
         Map<User, List<Player>> players = TheGameModel.getInstance().getUsersPlayers();
         Workbook book = new HSSFWorkbook();
         Sheet usersSheet = book.createSheet("Users");
@@ -40,6 +40,14 @@ public class ExcelUtils {
         Row playerCommentRow = playersSheet.createRow(plCounter++);
         int colCounter = 0;
         createStringCell("Login", playerCommentRow, colCounter++);//1
+        if (include) {
+            createStringCell("Password", playerCommentRow, colCounter++);
+            createStringCell("Contact", playerCommentRow, colCounter++);
+            createStringCell("Sex", playerCommentRow, colCounter++);
+            createStringCell("Age", playerCommentRow, colCounter++);
+            createStringCell("Income", playerCommentRow, colCounter++);
+            createStringCell("Count", playerCommentRow, colCounter++);
+        }
         createStringCell("Timestamp", playerCommentRow, colCounter++);
         createStringCell("AlreadyPlayed", playerCommentRow, colCounter++);
         createStringCell("RozenbergNumber", playerCommentRow, colCounter++);
@@ -50,7 +58,7 @@ public class ExcelUtils {
         for (int i = 1; i <=5; i++) {
             createStringCell("Stage3bet(" + i + ")", playerCommentRow, colCounter++);
             createStringCell("Stage3betAsPercent(" + i + ")", playerCommentRow, colCounter++);
-            createStringCell("Stage3afterBetQ(" + i + ")", playerCommentRow, colCounter++);//10
+            createStringCell("Stage3afterBetQ(" + i + ")", playerCommentRow, colCounter++);//16
         }
 
         createStringCell("Stage3Wallet", playerCommentRow, colCounter++);
@@ -69,7 +77,7 @@ public class ExcelUtils {
         }
 
         createStringCell("Stage7Wallet", playerCommentRow, colCounter++);
-        createStringCell("Stage7SuperReturn", playerCommentRow, colCounter++);//40
+        createStringCell("Stage7SuperReturn", playerCommentRow, colCounter++);//46
         createStringCell("StagesResultWallet", playerCommentRow, colCounter++);
 
         for (int i = 1; i <=6; i++) {
@@ -108,6 +116,14 @@ public class ExcelUtils {
                 Row pRow = playersSheet.createRow(plCounter++);
                 colCounter = 0;
                 createStringCell(user.getLogin(), pRow, colCounter++);//1
+                if (include) {
+                    createStringCell(user.getPassword(), pRow, colCounter++);
+                    createStringCell(user.getContact(), pRow, colCounter++);
+                    createNumericCell(user.getSex(), pRow, colCounter++);
+                    createNumericCell(user.getAge(), pRow, colCounter++);
+                    createNumericCell(user.getIncome(), pRow, colCounter++);
+                    createNumericCell(user.getCount(), pRow, colCounter++);
+                }
                 createStringCell(player.getTimestamp(), pRow, colCounter++);
                 createBooleanCell(player.isAlreadyPlayed(), pRow, colCounter++);
                 createNumericCell(player.getRozenbergNumber().getVariantNumber(), pRow, colCounter++);

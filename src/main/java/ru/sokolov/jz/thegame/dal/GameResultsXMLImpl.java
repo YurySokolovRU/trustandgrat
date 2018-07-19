@@ -66,6 +66,11 @@ public class GameResultsXMLImpl implements IGameResults {
     }
 
     @Override
+    public Player getUserPlayer(String userLogin, String timestamp) {
+        return XMLUtils.readPlayerFromDocument(userLogin, timestamp, FOLDER_PATH);
+    }
+
+    @Override
     public List<Player> getPlayers() {
         return XMLUtils.readAllPlayers(FOLDER_PATH);
     }
@@ -77,5 +82,16 @@ public class GameResultsXMLImpl implements IGameResults {
         }
         Logger.getLogger(getClass().getName()).info(folder.getAbsolutePath());
         return true;
+    }
+
+    @Override
+    public void deletePlayer(String timestamp) {
+        XMLUtils.deletePlayerDocument(timestamp, FOLDER_PATH);
+    }
+
+    @Override
+    public void deleteUser(String userLogin) {
+        XMLUtils.deleteUserDocument(userLogin, FOLDER_PATH);
+        XMLUtils.deleteUserFolder(userLogin, FOLDER_PATH);
     }
 }
